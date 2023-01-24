@@ -6,6 +6,7 @@ import { Header } from '../../components';
 import { financialChartData, FinancialPrimaryYAxis, FinancialPrimaryXAxis } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 
+// Gwapo ko
 
 const date1 = new Date('2017, 1, 1');
 
