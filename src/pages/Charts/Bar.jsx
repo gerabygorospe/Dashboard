@@ -1,9 +1,38 @@
-import React from 'react'
+import React from 'react';
 
-const Bar = () => {
+import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, Legend, Category, Tooltip, ColumnSeries, DataLabel } from '@syncfusion/ej2-react-charts';
+
+import { Header } from '../../components';
+import { barCustomSeries, barPrimaryYAxis, barPrimaryXAxis } from '../../data/dummy';
+import { useStateContext } from '../../contexts/ContextProvider';
+
+
+const BarChart = () => {
+  const { currentMode } = useStateContext();
+
   return (
-    <div>Bar</div>
+    <div className='m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl'>
+      <Header category='Bar' title='Olympic Medal Counts-ROI' />
+        <div className='w-full'>
+          <ChartComponent
+            id='bar-chart'
+            height='420px'
+            primaryXAxis={barPrimaryXAxis}
+            primaryYAxis={barPrimaryYAxis}
+            chartArea={{ border: {width: 0}}}
+            tooltip={{enable: true}}
+            background={currentMode === 'Dark' ? '#33373E' : '#fff'}
+            legendSettings={{background: 'white'}}
+          >
+          <Inject services={[Category, ColumnSeries, DataLabel, Tooltip, Legend]} />
+            <SeriesCollectionDirective>
+              {barCustomSeries.map((item, index) => <SeriesDirective key={index}{...item}  />)}
+            </SeriesCollectionDirective>
+          </ChartComponent>
+        </div>
+    </div>
+    
   )
 }
 
-export default Bar
+export default BarChart;
